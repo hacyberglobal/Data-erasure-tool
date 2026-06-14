@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Multi‑Delivery Access & Data Erasure Portal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body {
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:#020617;
+      background:radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
+      color:#e5e7eb;
+      padding:20px;
+      display:flex;
+      justify-content:center;
+    }
+    .container {
+      width:100%;
+      max-width:980px;
+      background:#020617;
+      border-radius:18px;
+      border:1px solid rgba(148,163,184,0.35);
+      box-shadow:0 24px 60px rgba(0,0,0,0.75);
+      overflow:hidden;
+    }
+    .header {
+      background:linear-gradient(90deg,#020617,#020617,#022c22);
+      color:#f9fafb;
+      padding:18px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:2px solid #16a34a;
+    }
+    .brand-wrap {
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo {
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:radial-gradient(circle at 30% 20%,#4ade80 0,#16a34a 40%,#065f46 100%);
+      box-shadow:0 0 0 3px rgba(22,163,74,0.45);
+    }
+    .tag {
+      font-size:11px;
+      padding:5px 12px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      background:rgba(15,23,42,0.7);
+    }
+    .content {
+      padding:22px;
+    }
+    h1 {
+      margin:0 0 6px;
+      font-size:22px;
+      color:#f9fafb;
+    }
+    .subtitle {
+      font-size:13px;
+      color:#9ca3af;
+      margin-bottom:18px;
+    }
+    .section {
+      border:1px solid rgba(51,65,85,0.9);
+      border-radius:14px;
+      padding:16px;
+      margin-bottom:18px;
+      background:radial-gradient(circle at top left,#020617 0,#020617 55%,#020617 100%);
+    }
+    .section-title {
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:0.14em;
+      color:#6b7280;
+      margin-bottom:6px;
+    }
+    .status-pill {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 12px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:600;
+      background:rgba(250,204,21,0.08);
+      border:1px solid rgba(250,204,21,0.6);
+      color:#facc15;
+      margin-bottom:14px;
+    }
+    .status-dot {
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#facc15;
+      box-shadow:0 0 6px rgba(250,204,21,0.9);
+    }
+    .footer {
+      padding:12px 20px;
+      border-top:1px solid rgba(30,64,175,0.6);
+      font-size:11px;
+      color:#6b7280;
+      text-align:center;
+      background:#020617;
+    }
+    .action-btn {
+      display:inline-block;
+      margin-top:14px;
+      padding:10px 18px;
+      background:#16a34a;
+      color:white;
+      font-size:13px;
+      font-weight:600;
+      border-radius:999px;
+      text-align:center;
+      cursor:pointer;
+      border:none;
+      box-shadow:0 0 14px rgba(34,197,94,0.45);
+    }
+    .action-btn:hover {
+      background:#22c55e;
+    }
+    .lang-toggle-wrap {
+      text-align:right;
+      margin-bottom:18px;
+    }
+    .lang-btn {
+      padding:8px 14px;
+      background:#0ea5e9;
+      color:white;
+      border:none;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+      cursor:pointer;
+      box-shadow:0 0 14px rgba(56,189,248,0.45);
+    }
+    .lang-btn:hover {
+      background:#0284c7;
+    }
+    .platform-chips {
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-top:8px;
+      font-size:11px;
+    }
+    .chip {
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      color:#e5e7eb;
+      background:rgba(15,23,42,0.8);
+    }
+    .input-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .input-row > div {
+      flex:1 1 180px;
+    }
+    label {
+      display:block;
+      font-size:11px;
+      color:#9ca3af;
+      margin-bottom:3px;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:7px 9px;
+      border-radius:8px;
+      border:1px solid rgba(55,65,81,0.9);
+      background:#020617;
+      color:#e5e7eb;
+      font-size:12px;
+    }
+    textarea {
+      min-height:70px;
+      resize:vertical;
+    }
+    .badge {
+      display:inline-block;
+      padding:3px 8px;
+      border-radius:999px;
+      font-size:10px;
+      border:1px solid rgba(148,163,184,0.7);
+      color:#9ca3af;
+    }
+    .admin-panel {
+      border:1px dashed rgba(148,163,184,0.6);
+      border-radius:10px;
+      padding:10px;
+      margin-top:10px;
+      background:rgba(15,23,42,0.7);
+      font-size:12px;
+    }
+    .admin-panel h4 {
+      margin:0 0 6px;
+      font-size:12px;
+      color:#e5e7eb;
+    }
+    .admin-panel textarea {
+      font-size:12px;
+    }
+    .pill-green {
+      color:#4ade80;
+    }
+    .pill-red {
+      color:#fca5a5;
+    }
+    .pill-yellow {
+      color:#facc15;
+    }
+    .appTab {
+      padding:6px 12px;
+      background:#0f172a;
+      border:1px solid rgba(148,163,184,0.4);
+      color:#e5e7eb;
+      border-radius:8px;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .appTab.active {
+      background:#0284c7;
+      border-color:#38bdf8;
+      color:white;
+      box-shadow:0 0 12px rgba(56,189,248,0.45);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-wrap">
+      <div class="logo"></div>
+      <div>
+        <div style="font-size:17px;font-weight:700;letter-spacing:0.5px;">
+          Multi‑Delivery Access Portal
+        </div>
+        <div style="font-size:11px;color:#9ca3af;letter-spacing:0.15em;text-transform:uppercase;">
+          Data Erasure • Deactivation Analysis • Reactivation Path
+        </div>
+      </div>
+    </div>
+    <div class="tag">Secure Session</div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- LANGUAGE TOGGLE (UI TEXT ONLY – YOU CAN EXTEND IF NEEDED) -->
+    <div class="lang-toggle-wrap">
+      <button id="langToggle" class="lang-btn">ES / EN</button>
+    </div>
+
+    <h1 id="title">Data Erasure & Deactivation Analysis – Multi‑Delivery Accounts</h1>
+    <div id="subtitle" class="subtitle">
+      Submit your details below to generate a full deactivation analysis, simulated live tracking, and a data‑erasure reset path across your connected delivery apps.
+    </div>
+
+    <div class="status-pill">
+      <span class="status-dot"></span>
+      <span id="status">STATUS: INTAKE REQUIRED – NO DATA YET</span>
+    </div>
+
+    <!-- CLIENT INTAKE FORM -->
+    <div class="section">
+      <div class="section-title">Client intake – identity & apps</div>
+
+      <div class="input-row">
+        <div>
+          <label>Full name</label>
+          <input id="fullName" placeholder="John Doe" />
+        </div>
+        <div>
+          <label>Email used on apps</label>
+          <input id="email" placeholder="email@example.com" />
+        </div>
+        <div>
+          <label>Phone number</label>
+          <input id="phone" placeholder="+1 555 000 0000" />
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label>Country</label>
+          <input id="country" placeholder="United States" />
+        </div>
+        <div>
+          <label>City</label>
+          <input id="city" placeholder="Los Angeles" />
+        </div>
+        <div>
+          <label>Approx. deactivation date</label>
+          <input id="deactDate" type="date" />
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label>Apps affected (select main)</label>
+          <select id="mainApp">
+            <option value="ubereats">Uber Eats</option>
+            <option value="doordash">DoorDash</option>
+            <option value="instacart">Instacart</option>
+            <option value="spark">Spark Driver</option>
+            <option value="grubhub">Grubhub</option>
+            <option value="amazonflex">Amazon Flex</option>
+          </select>
+        </div>
+        <div>
+          <label>Other apps (comma separated)</label>
+          <input id="otherApps" placeholder="Shipt, Roadie, Gopuff" />
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label>Did you appeal?</label>
+          <select id="appealed">
+            <option value="no">No</option>
+            <option value="yes">Yes – once</option>
+            <option value="multi">Yes – multiple times</option>
+          </select>
+        </div>
+        <div>
+          <label>Appeal result</label>
+          <select id="appealResult">
+            <option value="none">No appeal / no response</option>
+            <option value="rejected">Rejected</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+        <div>
+          <label>Any prior deactivations?</label>
+          <select id="priorDeact">
+            <option value="no">No</option>
+            <option value="yes">Yes on another app</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label>Device / login behavior</label>
+          <select id="deviceBehavior">
+            <option value="single">Single device, no VPN</option>
+            <option value="multi">Multiple devices</option>
+            <option value="vpn">Used VPN / emulator</option>
+          </select>
+        </div>
+        <div>
+          <label>Delivery pattern</label>
+          <select id="deliveryPattern">
+            <option value="normal">Normal / stable</option>
+            <option value="highCancel">High cancellations</option>
+            <option value="late">Frequent late deliveries</option>
+            <option value="spikes">Big spikes / irregular activity</option>
+          </select>
+        </div>
+        <div>
+          <label>Customer complaints</label>
+          <select id="complaints">
+            <option value="none">None known</option>
+            <option value="some">Some complaints</option>
+            <option value="many">Many complaints</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label>Document / ID issues</label>
+          <select id="docIssues">
+            <option value="none">No issues</option>
+            <option value="expired">Expired ID / document</option>
+            <option value="mismatch">Name / photo mismatch</option>
+          </select>
+        </div>
+        <div>
+          <label>Background check</label>
+          <select id="bgCheck">
+            <option value="clear">Clear / no known issue</option>
+            <option value="pending">Pending / under review</option>
+            <option value="failed">Failed / flagged</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;">
+        <label>Describe what happened before deactivation</label>
+        <textarea id="story" placeholder="Explain what you were doing, any issues, any warnings, etc."></textarea>
+      </div>
+
+      <button class="action-btn" onclick="generateReason()">Generate Deactivation Analysis</button>
+      <span class="badge" id="intakeStatus">Awaiting intake submission…</span>
+    </div>
+
+    <!-- GENERATED REASON ENGINE OUTPUT -->
+    <div class="section">
+      <div class="section-title">Generated deactivation analysis</div>
+      <p style="font-size:13px;color:#cbd5f5;margin-bottom:6px;">
+        This analysis is generated based on the intake data and simulated cross‑platform risk patterns.
+      </p>
+      <div id="generatedReason" style="font-size:13px;color:#e5e7eb;min-height:40px;">
+        No analysis generated yet.
+      </div>
+
+      <div class="admin-panel">
+        <h4>Admin override panel</h4>
+        <p style="margin:0 0 6px;color:#9ca3af;font-size:11px;">
+          You can adjust the final reason text before sending it to the client.
+        </p>
+        <textarea id="adminOverride" placeholder="Edit or refine the generated reason here…"></textarea>
+        <button class="action-btn" style="margin-top:8px;" onclick="applyAdminOverride()">Apply Admin Override</button>
+        <span class="badge" id="adminStatus">No override applied.</span>
+      </div>
+    </div>
+
+    <!-- MULTI‑DELIVERY APP LIST -->
+    <div class="section">
+      <div class="section-title">Connected delivery platforms</div>
+      <p style="font-size:13px;color:#cbd5f5;margin-bottom:10px;">
+        The following delivery and driver platforms may be linked to this profile:
+      </p>
+      <div class="platform-chips">
+        <div class="chip">Uber Eats</div>
+        <div class="chip">DoorDash</div>
+        <div class="chip">Grubhub</div>
+        <div class="chip">Instacart</div>
+        <div class="chip">Shipt</div>
+        <div class="chip">Amazon Flex</div>
+        <div class="chip">Spark Driver</div>
+        <div class="chip">Roadie</div>
+        <div class="chip">Point Pickup</div>
+        <div class="chip">Lyft Delivery</div>
+        <div class="chip">Walmart Delivery</div>
+        <div class="chip">Gopuff</div>
+        <div class="chip">Caviar</div>
+        <div class="chip">Favor</div>
+        <div class="chip">SkipTheDishes</div>
+        <div class="chip">Deliveroo</div>
+        <div class="chip">JustEat</div>
+        <div class="chip">Other Platforms</div>
+      </div>
+      <p style="margin-top:12px;font-size:12px;color:#9ca3af;">
+        Note: This portal simulates shared identity and risk analysis across multiple platforms. Final decisions remain with each app.
+      </p>
+    </div>
+
+    <!-- MULTI‑DELIVERY LIVE TRACKING SYSTEM -->
+    <div class="section" style="border:1px solid rgba(56,189,248,0.45);background:rgba(2,6,23,0.55);">
+      <div class="section-title" style="color:#38bdf8;">Multi‑Delivery Live Tracking</div>
+
+      <div id="appTabs" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+        <button class="appTab active" data-app="ubereats">Uber Eats</button>
+        <button class="appTab" data-app="doordash">DoorDash</button>
+        <button class="appTab" data-app="instacart">Instacart</button>
+        <button class="appTab" data-app="spark">Spark Driver</button>
+        <button class="appTab" data-app="grubhub">Grubhub</button>
+        <button class="appTab" data-app="amazonflex">Amazon Flex</button>
+      </div>
+
+      <div id="appStatus" style="
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:4px 12px;
+        border-radius:999px;
+        font-size:11px;
+        font-weight:600;
+        background:rgba(250,204,21,0.08);
+        border:1px solid rgba(250,204,21,0.6);
+        color:#facc15;
+        margin-bottom:14px;
+      ">
+        <span class="status-dot"></span>
+        <span id="statusTextLive">Waiting for intake data…</span>
+      </div>
+
+      <ul id="appFeed" style="margin-top:10px;font-size:13px;color:#cbd5f5;line-height:1.55;">
+        <li>Initialize intake to start live tracking…</li>
+      </ul>
+    </div>
+
+    <!-- PROCESSING FEE / DATA ERASURE -->
+    <div class="section">
+      <div class="section-title">Data erasure & reset scope</div>
+      <p style="margin:0 0 8px;font-size:13px;color:#e5e7eb;">
+        This request will perform a <strong>full data‑erasure reset</strong> on identity and verification records that may be shared across multiple delivery and driver platforms using this profile.
+      </p>
+      <ul style="margin:0 0 0 18px;padding:0;font-size:13px;color:#cbd5f5;line-height:1.5;">
+        <li>Removal of the previous identity/document file from the shared verification layer</li>
+        <li>Clearing blocked or mismatched verification flags tied to this profile</li>
+        <li>Resetting the verification module for future onboarding checks</li>
+        <li>Enabling new document upload for potential re‑verification on supported apps</li>
+      </ul>
+      <p style="margin-top:8px;font-size:12px;color:#9ca3af;">
+        Final reactivation decisions remain at the discretion of each individual delivery platform.
+      </p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Processing fee</div>
+      <div style="border:1px solid rgba(248,113,113,0.8);background:rgba(127,29,29,0.25);border-radius:10px;padding:12px;margin-top:8px;">
+        <div style="font-size:18px;font-weight:700;color:#fecaca;">$75 Processing Fee</div>
+        <p style="margin:6px 0 0;font-size:13px;color:#fee2e2;">
+          This fee covers the data‑erasure request, shared‑profile cleanup, and activation of the reset workflow for multi‑delivery access.
+        </p>
+        <p style="margin:6px 0 0;font-size:12px;color:#fecaca;font-weight:600;">
+          Processing begins once payment is completed. You will receive a confirmation when the reset has been applied.
+        </p>
+      </div>
+      <button class="action-btn">Proceed with Payment</button>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    This portal simulates deactivation analysis and data‑erasure flows. It does not replace official decisions from any delivery platform.
+  </div>
+
+</div>
+
+<script>
+  // LANGUAGE TOGGLE (simple – title/subtitle/status only)
+  let lang = "en";
+  document.getElementById("langToggle").onclick = () => {
+    lang = lang === "en" ? "es" : "en";
+    if (lang === "es") {
+      document.getElementById("title").innerText =
+        "Análisis de Desactivación y Eliminación de Datos – Cuentas Multi‑Delivery";
+      document.getElementById("subtitle").innerText =
+        "Envíe sus datos para generar un análisis completo de desactivación, seguimiento simulado en vivo y ruta de restablecimiento con eliminación de datos en sus aplicaciones de reparto vinculadas.";
+      document.getElementById("status").innerText =
+        "ESTADO: SE REQUIERE REGISTRO – SIN DATOS AÚN";
+    } else {
+      document.getElementById("title").innerText =
+        "Data Erasure & Deactivation Analysis – Multi‑Delivery Accounts";
+      document.getElementById("subtitle").innerText =
+        "Submit your details below to generate a full deactivation analysis, simulated live tracking, and a data‑erasure reset path across your connected delivery apps.";
+      document.getElementById("status").innerText =
+        "STATUS: INTAKE REQUIRED – NO DATA YET";
+    }
+  };
+
+  // REASON GENERATOR ENGINE
+  function generateReason() {
+    const mainApp = document.getElementById("mainApp").value;
+    const appealed = document.getElementById("appealed").value;
+    const appealResult = document.getElementById("appealResult").value;
+    const priorDeact = document.getElementById("priorDeact").value;
+    const deviceBehavior = document.getElementById("deviceBehavior").value;
+    const deliveryPattern = document.getElementById("deliveryPattern").value;
+    const complaints = document.getElementById("complaints").value;
+    const docIssues = document.getElementById("docIssues").value;
+    const bgCheck = document.getElementById("bgCheck").value;
+    const story = document.getElementById("story").value.trim();
+
+    let reasons = [];
+
+    if (deviceBehavior === "multi" || deviceBehavior === "vpn") {
+      reasons.push("Unusual device or network behavior was detected on the account.");
+    }
+    if (deliveryPattern === "highCancel") {
+      reasons.push("High cancellation activity triggered automated risk scoring.");
+    } else if (deliveryPattern === "late") {
+      reasons.push("Frequent late deliveries contributed to a negative reliability score.");
+    } else if (deliveryPattern === "spikes") {
+      reasons.push("Irregular spikes in activity triggered a fraud‑prevention review.");
+    }
+    if (complaints === "some") {
+      reasons.push("Customer complaints were recorded and factored into the decision.");
+    } else if (complaints === "many") {
+      reasons.push("A high volume of customer complaints significantly impacted the account's trust score.");
+    }
+    if (docIssues === "expired") {
+      reasons.push("Identity documentation appears to be expired or outdated.");
+    } else if (docIssues === "mismatch") {
+      reasons.push("There were inconsistencies between the submitted ID and the account profile.");
+    }
+    if (bgCheck === "failed") {
+      reasons.push("Background check results did not meet platform requirements.");
+    } else if (bgCheck === "pending") {
+      reasons.push("Background check status is pending or requires manual review.");
+    }
+    if (priorDeact === "yes") {
+      reasons.push("The profile may be linked to a previously deactivated account on another platform.");
+    }
+    if (appealed === "yes" || appealed === "multi") {
+      if (appealResult === "rejected") {
+        reasons.push("A prior appeal was reviewed and the deactivation decision was upheld.");
+      } else if (appealResult === "pending") {
+        reasons.push("An appeal is still pending review by the platform.");
+      }
+    }
+
+    if (reasons.length === 0) {
+      reasons.push("The platform's automated risk systems flagged the account for behavior inconsistent with normal delivery patterns.");
+    }
+
+    let appLabel = "";
+    switch (mainApp) {
+      case "ubereats": appLabel = "Uber Eats"; break;
+      case "doordash": appLabel = "DoorDash"; break;
+      case "instacart": appLabel = "Instacart"; break;
+      case "spark": appLabel = "Spark Driver"; break;
+      case "grubhub": appLabel = "Grubhub"; break;
+      case "amazonflex": appLabel = "Amazon Flex"; break;
+      default: appLabel = "the selected platform"; break;
+    }
+
+    let summary =
+      `Based on the information provided, it is likely that ${appLabel} deactivated the account due to a combination of risk factors, including:\n\n` +
+      reasons.map(r => `• ${r}`).join("\n") +
+      `\n\nThis analysis is a reconstruction of probable internal reasoning and does not represent an official statement from any platform.`;
+
+    if (story) {
+      summary += `\n\nClient context:\n"${story}"`;
+    }
+
+    document.getElementById("generatedReason").innerText = summary;
+    document.getElementById("adminOverride").value = summary;
+    document.getElementById("intakeStatus").innerText = "Intake processed – analysis generated.";
+    document.getElementById("statusTextLive").innerText = "Live tracking active – simulated events based on intake.";
+    document.getElementById("appFeed").innerHTML = "<li>Intake received – starting simulated platform events…</li>";
+  }
+
+  function applyAdminOverride() {
+    const text = document.getElementById("adminOverride").value.trim();
+    if (text) {
+      document.getElementById("generatedReason").innerText = text;
+      document.getElementById("adminStatus").innerText = "Admin override applied.";
+    } else {
+      document.getElementById("adminStatus").innerText = "Override is empty – no changes applied.";
+    }
+  }
+
+  // MULTI‑DELIVERY LIVE TRACKING
+  const appReasons = {
+    ubereats: [
+      "Unusual delivery route patterns detected.",
+      "Multiple device logins triggered a security review.",
+      "Fraud prevention flagged collusion indicators.",
+      "Customer complaint spike triggered automated review.",
+      "Identity mismatch detected in verification layer."
+    ],
+    doordash: [
+      "Late delivery pattern triggered risk scoring.",
+      "Account linked to previously deactivated profile.",
+      "GPS spoofing indicators detected.",
+      "Appeal reviewed — decision upheld.",
+      "Verification module flagged inconsistent ID data."
+    ],
+    instacart: [
+      "Batch acceptance irregularities detected.",
+      "High cancellation rate triggered review.",
+      "Device fingerprint mismatch.",
+      "Background check requires manual review.",
+      "Identity verification failed automated checks."
+    ],
+    spark: [
+      "Order routing anomaly detected.",
+      "Multiple account link attempts flagged.",
+      "Delivery timing inconsistency triggered review.",
+      "Document verification expired.",
+      "Risk score recalculated — high risk."
+    ],
+    grubhub: [
+      "Location spoofing indicators detected.",
+      "Customer complaint threshold exceeded.",
+      "Appeal reviewed — decision final.",
+      "Verification mismatch in shared identity layer.",
+      "Platform flagged suspicious login behavior."
+    ],
+    amazonflex: [
+      "Package scanning irregularities detected.",
+      "Route deviation triggered automated review.",
+      "Account linked to flagged identity.",
+      "Document upload failed verification.",
+      "Appeal rejected — platform decision final."
+    ]
+  };
+
+  const appStatuses = [
+    "Under Review",
+    "Pending Appeal",
+    "Deactivated",
+    "Verification Required",
+    "Flagged for Manual Review",
+    "Identity Check Failed"
+  ];
+
+  let currentApp = "ubereats";
+
+  function updateAppFeed() {
+    const reasons = appReasons[currentApp];
+    if (!reasons) return;
+    const reason = reasons[Math.floor(Math.random() * reasons.length)];
+    const status = appStatuses[Math.floor(Math.random() * appStatuses.length)];
+
+    document.getElementById("statusTextLive").innerText = status;
+
+    const feed = document.getElementById("appFeed");
+    const li = document.createElement("li");
+    li.textContent = `${new Date().toLocaleTimeString()} — ${reason}`;
+    feed.prepend(li);
+
+    if (feed.children.length > 8) {
+      feed.removeChild(feed.lastChild);
+    }
+  }
+
+  document.querySelectorAll(".appTab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".appTab").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentApp = btn.dataset.app;
+      document.getElementById("appFeed").innerHTML = "<li>Loading new platform data…</li>";
+    });
+  });
+
+  setInterval(updateAppFeed, 3500);
+</script>
+
+</body>
+</html>
