@@ -1,0 +1,37 @@
+{
+  "name": "data-erasure-tool",
+  "version": "1.0.0",
+  "description": "Multi-delivery platform deactivation analysis and data erasure portal with shared identity verification reset",
+  "author": "Hacyber Global Tech",
+  "license": "Proprietary",
+  "private": true,
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build required - static site'",
+    "serve": "python -m http.server 5000"
+  },
+  "keywords": [
+    "delivery",
+    "deactivation",
+    "data-erasure",
+    "uber-eats",
+    "doordash",
+    "instacart",
+    "verification",
+    "portal"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hacyberglobal/Data-erasure-tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hacyberglobal/Data-erasure-tool/issues"
+  },
+  "homepage": "https://github.com/hacyberglobal/Data-erasure-tool#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {}
+}
